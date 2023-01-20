@@ -6,10 +6,11 @@ public class Main {
         BinaryTreeA binTreeB = new BinaryTreeA();
         TreeSet binTreeC = new TreeSet();
         Random random = new Random();
-        int m = 13;
+        int m = 16;
         int n = (int) (Math.pow(2, m)) - 1;
         System.out.println("Number of elements: " + ((int) (Math.pow(2, m)) - 1));
         ArrayList<Integer> val = new ArrayList<>();
+        ArrayList<Integer> valB = new ArrayList<>();
 
         int counter = 100;
         long totalOfTimesFA, totalOfTimesFB, totalOfTimesFC, totalOfTimesA, totalOfTimesB, totalOfTimesC;
@@ -18,14 +19,17 @@ public class Main {
 
         while (counter > 0) {
             val.clear();
+            valB.clear();
             binTreeA.clearTree(binTreeA.root);
             binTreeB.clearTree(binTreeB.root);
             binTreeC.clear();
-            //inserting
             for (int i = 0; i < n; i++) {
                 val.add(i, random.nextInt(100) + 1);
             }
+            valB.addAll(val);
+            Collections.sort(valB);
 
+            //inserting
             startTime = System.nanoTime();
             for (int i = 0; i < n; i++) {
                 binTreeA.insert(val.get(i));
@@ -35,7 +39,7 @@ public class Main {
             totalOfTimesA = totalOfTimesA + duration;
 
             startTime = System.nanoTime();
-            binTreeB.insertBalanced(val);
+            binTreeB.insertBalanced(valB);
             endTime = System.nanoTime();
             duration = endTime - startTime;
             totalOfTimesB += duration;
@@ -51,8 +55,8 @@ public class Main {
 
             //finding
             startTime = System.nanoTime();
-            for(int i =0;i<n;i++){
-                if(!binTreeB.contains(binTreeA.root,val.get(i))){
+            for (int i = 0; i < n; i++) {
+                if (!binTreeB.contains(binTreeA.root, val.get(i))) {
                     System.out.println(val.get(i) + " not found");
                 }
             }
@@ -61,9 +65,9 @@ public class Main {
             totalOfTimesFA += duration;
 
             startTime = System.nanoTime();
-            for(int i =0;i<n;i++){
-                if(!binTreeB.contains(binTreeB.root,val.get(i))){
-                    System.out.println(val.get(i) + " not found");
+            for (int i = 0; i < n; i++) {
+                if (!binTreeB.contains(binTreeB.root, valB.get(i))) {
+                    System.out.println(valB.get(i) + " not found");
                 }
             }
             endTime = System.nanoTime();

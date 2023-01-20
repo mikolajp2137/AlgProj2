@@ -42,7 +42,7 @@ public class BinaryTreeA {
     }
 
     public void insertBalanced(ArrayList<Integer> arrayList){
-        Collections.sort(arrayList);
+        //Collections.sort(arrayList);
         //arrayList.forEach(System.out::println);
         insertSorted(arrayList,0,arrayList.size()-1);
     }
